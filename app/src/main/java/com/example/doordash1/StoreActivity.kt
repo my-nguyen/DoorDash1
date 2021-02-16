@@ -32,12 +32,13 @@ class StoreActivity : AppCompatActivity() {
         Glide.with(this).load(url).apply(roundedCorners).into(binding.ivPicture)
         binding.tvName.text = store.name
         val splits = store.description.split(", ")
-        binding.tvDescription.text = "${splits[0]}, ${splits[1]}"
+        binding.tvDescription.text = "${splits[0]} - ${splits[1]}"
         binding.tvStars.text = restaurant.average_rating.toString()
         binding.tvRatings.text = "${restaurant.number_of_ratings} ratings"
-        val distance = "%.1f".format(store.distance_from_consumer)
-        binding.tvDistance.text = "- $distance mi"
-        binding.tvPriceRange.text = "- $".repeat(restaurant.price_range)
+        val distance = "- %.1f mi".format(store.distance_from_consumer)
+        binding.tvDistance.text = "- %.1f mi".format(store.distance_from_consumer)
+        val dollars = "$".repeat(restaurant.price_range)
+        binding.tvPriceRange.text = "- $dollars"
 
         binding.tvDeliverFeeAmount.text = "$%.2f".format(store.delivery_fee)
         binding.tvDeliveryFeeLabel.text = "delivery fee"

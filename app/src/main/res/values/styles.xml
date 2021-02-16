@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="SmallBoldTTNormsRegular">
-        android:textSize="12sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/tt_norms_regular"
-    </style>
-</resources>

@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.doordash1.databinding.ItemMenuBinding
+import com.example.doordash1.databinding.ItemMenuItemBinding
 
 class MenuItemsAdapter(val context: Context, private val menuItems: List<PopularItem>): RecyclerView.Adapter<MenuItemsAdapter.ViewHolder>() {
 
-    inner class ViewHolder(private val binding: ItemMenuBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemMenuItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(menuItem: PopularItem) {
             binding.tvName.text = menuItem.name
             binding.tvDescription.text = menuItem.description
@@ -20,7 +20,7 @@ class MenuItemsAdapter(val context: Context, private val menuItems: List<Popular
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(context)
-        val binding = ItemMenuBinding.inflate(inflater, parent, false)
+        val binding = ItemMenuItemBinding.inflate(inflater, parent, false)
         return ViewHolder(binding)
     }
 
