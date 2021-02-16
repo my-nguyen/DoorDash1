@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/iv_food"
         android:layout_width="0dp"
-        android:layout_height="160dp"
+        android:layout_height="170dp"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="16dp"
@@ -24,8 +24,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:fontFamily="@font/ttnorms_medium"
         android:textColor="@color/black"
-        android:fontFamily="@font/tt_norms_bold"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/iv_food"
         app:layout_constraintTop_toBottomOf="@+id/iv_food"
         tools:text="Lee's Sandwiches" />
@@ -43,61 +45,31 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:ellipsize="end"
-        android:fontFamily="@font/tt_norms_regular"
         android:singleLine="true"
-        android:textColor="#404040"
+        android:fontFamily="@font/ttnorms_medium"
+        android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@id/guideline"
         app:layout_constraintStart_toStartOf="@+id/tv_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_name"
         tools:text="$ . Vietnamese, Sandwiches, Coffee..." />
 
     <TextView
-        android:id="@+id/tv_stars"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        app:layout_constraintStart_toStartOf="@+id/tv_description"
-        app:layout_constraintTop_toBottomOf="@+id/tv_description"
-        tools:text="4.8" />
-
-    <ImageView
-        android:id="@+id/iv_star"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_stars"
-        app:layout_constraintStart_toEndOf="@+id/tv_stars"
-        app:layout_constraintTop_toTopOf="@+id/tv_stars"
-        app:srcCompat="@drawable/star" />
-
-    <TextView
-        android:id="@+id/tv_ratings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:fontFamily="@font/tt_norms_regular"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_star"
-        app:layout_constraintStart_toEndOf="@+id/iv_star"
-        app:layout_constraintTop_toTopOf="@+id/iv_star"
-        tools:text="1,400+ ratings" />
-
-    <TextView
         android:id="@+id/tv_how_far"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/tt_norms_regular"
+        android:fontFamily="@font/ttnorms_medium"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/iv_food"
-        app:layout_constraintTop_toTopOf="@+id/tv_description"
+        app:layout_constraintTop_toTopOf="@+id/tv_name"
         tools:text="26 min" />
 
     <TextView
         android:id="@+id/tv_is_free_delivery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/tt_norms_regular"
+        android:fontFamily="@font/ttnorms_medium"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_how_far"
-        app:layout_constraintTop_toTopOf="@+id/tv_ratings"
+        app:layout_constraintTop_toTopOf="@+id/tv_description"
         tools:text="Free delivery" />
 </androidx.constraintlayout.widget.ConstraintLayout>

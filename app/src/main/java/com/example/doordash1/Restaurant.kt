@@ -1,5 +1,7 @@
 package com.example.doordash1
 
+import java.io.Serializable
+
 data class Restaurant(
     val phone_number: String,
     val yelp_review_count: Int,
@@ -17,11 +19,11 @@ data class Restaurant(
     val address: Address,
     val price_range: Int,
     val name: String,
-)
+): Serializable
 
-data class Menu2(val subtitle: String, val name: String, val open_hours: List<List<OpenHour>>, val id: Long)
+data class Menu2(val subtitle: String, val name: String, val open_hours: List<List<OpenHour>>, val id: Long): Serializable
 
-data class OpenHour(val hour: Int, val minute: Int)
+data class OpenHour(val hour: Int, val minute: Int): Serializable
 
 data class Address(
     val city: String,
@@ -33,4 +35,4 @@ data class Address(
     val lat: Float,
     val lng: Float,
     val zip_code: String
-)
+): Serializable

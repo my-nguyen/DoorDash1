@@ -31,24 +31,20 @@ class MainActivity : AppCompatActivity() {
         binding.rvStores.adapter = adapter
         binding.rvStores.layoutManager = LinearLayoutManager(this)
 
-        val retrofit = Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build()
-        val doorDashService = retrofit.create(DoorDashService::class.java)
-        doorDashService.listRestaurants(lat=37.374410f, lng=-121.872600f).enqueue(object: Callback<Restaurants> {
-            override fun onResponse(call: Call<Restaurants>, response: Response<Restaurants>) {
+        val doorDashService = Network.retrofit.create(DoorDashService::class.java)
+        doorDashService.getStores(lat=37.374410f, lng=-121.872600f).enqueue(object: Callback<Stores> {
+            override fun onResponse(call: Call<Stores>, response: Response<Stores>) {
                 Log.d(TAG, "onResponse $response")
                 val body = response.body()
                 if (body == null) {
                     Log.w(TAG, "Did not receive a valid response from DoorDash API... exiting")
                 } else {
-                    /*for (store in body.stores) {
-                        Log.d(TAG, "${store.toString()}")
-                    }*/
                     stores.addAll(body.stores)
                     adapter.notifyDataSetChanged()
                 }
             }
 
-            override fun onFailure(call: Call<Restaurants>, t: Throwable) {
+            override fun onFailure(call: Call<Stores>, t: Throwable) {
                 Log.d(TAG, "onFailure $t")
             }
         })
