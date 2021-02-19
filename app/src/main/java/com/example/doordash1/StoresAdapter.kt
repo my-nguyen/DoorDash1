@@ -1,11 +1,16 @@
 package com.example.doordash1
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -36,26 +41,13 @@ class StoresAdapter(private val context: Context, private val stores: List<Store
 
         override fun onClick(v: View?) {
             if (adapterPosition != RecyclerView.NO_POSITION) {
-                val doorDashService = Network.retrofit.create(DoorDashService::class.java)
                 val store = stores[adapterPosition]
-                doorDashService.getRestaurant(store.id).enqueue(object: Callback<Restaurant> {
-                    override fun onResponse(call: Call<Restaurant>, response: Response<Restaurant>) {
-                        val body = response.body()
-                        if (body == null) {
-                            Log.w(MainActivity.TAG, "Did not receive a valid response from DoorDash API... exiting")
-                        } else {
-                            /*binding.tvStars.text = body.average_rating.toString()
-                            binding.tvRatings.text = "${body.number_of_ratings} ratings"*/
-                            val intent = Intent(context, StoreActivity::class.java)
-                            intent.putExtra("EXTRA_STORE", store)
-                            intent.putExtra("EXTRA_RESTAURANT", body)
-                            context.startActivity(intent)
-                        }
-                    }
-
-                    override fun onFailure(call: Call<Restaurant>, t: Throwable) {
-                        Log.d(StoreActivity.TAG, "onFailure $t")
-                    }
+                val model = ViewModelProvider(context as AppCompatActivity).get(MainViewModel::class.java)
+                model.getRestaurant(store.id).observe(context, Observer {
+                    val intent = Intent(context, StoreActivity::class.java)
+                    intent.putExtra("EXTRA_STORE", store)
+                    intent.putExtra("EXTRA_RESTAURANT", it)
+                    context.startActivity(intent)
                 })
             }
         }

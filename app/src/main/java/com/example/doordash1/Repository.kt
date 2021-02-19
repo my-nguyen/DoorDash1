@@ -9,7 +9,7 @@ import retrofit2.Response
 object Repository {
     const val TAG = "Repository"
 
-    val doorDashService = Network.doorDash()
+    private val doorDashService = Network.doorDash()
 
     fun getStores(): MutableLiveData<List<Store>> {
         val stores = MutableLiveData<List<Store>>()
@@ -20,6 +20,7 @@ object Repository {
                 if (body == null) {
                     Log.w(TAG, "Did not receive a valid response from DoorDash API... exiting")
                 } else {
+                    Log.d(TAG, "DoorDashService returns ${body.stores.size} records")
                     stores.value = body.stores
                 }
             }
@@ -29,5 +30,24 @@ object Repository {
             }
         })
         return stores
+    }
+
+    fun getRestaurant(id: Int): MutableLiveData<Restaurant> {
+        val restaurant = MutableLiveData<Restaurant>()
+        doorDashService.getRestaurant(id).enqueue(object: Callback<Restaurant> {
+            override fun onResponse(call: Call<Restaurant>, response: Response<Restaurant>) {
+                val body = response.body()
+                if (body == null) {
+                    Log.w(MainActivity.TAG, "Did not receive a valid response from DoorDash API... exiting")
+                } else {
+                    restaurant.value = body
+                }
+            }
+
+            override fun onFailure(call: Call<Restaurant>, t: Throwable) {
+                Log.d(StoreActivity.TAG, "onFailure $t")
+            }
+        })
+        return restaurant
     }
 }

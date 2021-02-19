@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         val model: MainViewModel by viewModels()
         model.getStores().observe(this, Observer {
+            Log.d(TAG, "Observer received ${it!!.size} stores")
             stores.addAll(it!!)
             adapter.notifyDataSetChanged()
         })
