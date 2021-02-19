@@ -5,9 +5,6 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -36,13 +33,9 @@ class StoresAdapter(private val context: Context, private val stores: List<Store
         override fun onClick(v: View?) {
             if (adapterPosition != RecyclerView.NO_POSITION) {
                 val store = stores[adapterPosition]
-                val model = ViewModelProvider(context as AppCompatActivity).get(MainViewModel::class.java)
-                model.getRestaurant(store.id).observe(context, Observer {
-                    val intent = Intent(context, RestaurantActivity::class.java)
-                    intent.putExtra("EXTRA_STORE", store)
-                    intent.putExtra("EXTRA_RESTAURANT", it)
-                    context.startActivity(intent)
-                })
+                val intent = Intent(context, RestaurantActivity::class.java)
+                intent.putExtra("EXTRA_STORE", store)
+                context.startActivity(intent)
             }
         }
     }

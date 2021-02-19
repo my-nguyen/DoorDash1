@@ -1,17 +1,12 @@
 package com.example.doordash1
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.doordash1.databinding.ActivityMainBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     lateinit var binding: ActivityMainBinding
+    @Inject lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +29,10 @@ class MainActivity : AppCompatActivity() {
         binding.rvStores.adapter = adapter
         binding.rvStores.layoutManager = LinearLayoutManager(this)
 
-        val model: MainViewModel by viewModels()
-        model.getStores().observe(this, Observer {
+        (applicationContext as MyApplication).appComponent.inject(this)
+        viewModel.getStores().observe(this, Observer {
             Log.d(TAG, "Observer received ${it!!.size} stores")
-            stores.addAll(it!!)
+            stores.addAll(it)
             adapter.notifyDataSetChanged()
         })
     }

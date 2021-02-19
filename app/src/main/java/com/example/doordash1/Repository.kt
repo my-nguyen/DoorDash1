@@ -5,15 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-object Repository {
-    const val TAG = "Repository"
-
-    private val doorDashService = Network.doorDash()
+class Repository @Inject constructor(private val doorDashService: DoorDashService) {
+    companion object {
+        const val TAG = "Repository"
+    }
 
     fun getStores(): MutableLiveData<List<Store>> {
         val stores = MutableLiveData<List<Store>>()
-        doorDashService.getStores().enqueue(object: Callback<Stores> {
+        doorDashService.getStores().enqueue(object : Callback<Stores> {
             override fun onResponse(call: Call<Stores>, response: Response<Stores>) {
                 Log.d(TAG, "onResponse $response")
                 val body = response.body()
@@ -34,7 +35,7 @@ object Repository {
 
     fun getRestaurant(id: Int): MutableLiveData<Restaurant> {
         val restaurant = MutableLiveData<Restaurant>()
-        doorDashService.getRestaurant(id).enqueue(object: Callback<Restaurant> {
+        doorDashService.getRestaurant(id).enqueue(object : Callback<Restaurant> {
             override fun onResponse(call: Call<Restaurant>, response: Response<Restaurant>) {
                 val body = response.body()
                 if (body == null) {
