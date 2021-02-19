@@ -3,6 +3,8 @@ package com.example.doordash1
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.doordash1.databinding.ActivityMainBinding
 import retrofit2.Call
@@ -31,22 +33,10 @@ class MainActivity : AppCompatActivity() {
         binding.rvStores.adapter = adapter
         binding.rvStores.layoutManager = LinearLayoutManager(this)
 
-        val doorDashService = Network.retrofit.create(DoorDashService::class.java)
-        doorDashService.getStores(lat=37.374410f, lng=-121.872600f).enqueue(object: Callback<Stores> {
-            override fun onResponse(call: Call<Stores>, response: Response<Stores>) {
-                Log.d(TAG, "onResponse $response")
-                val body = response.body()
-                if (body == null) {
-                    Log.w(TAG, "Did not receive a valid response from DoorDash API... exiting")
-                } else {
-                    stores.addAll(body.stores)
-                    adapter.notifyDataSetChanged()
-                }
-            }
-
-            override fun onFailure(call: Call<Stores>, t: Throwable) {
-                Log.d(TAG, "onFailure $t")
-            }
+        val model: MainViewModel by viewModels()
+        model.getStores().observe(this, Observer {
+            stores.addAll(it!!)
+            adapter.notifyDataSetChanged()
         })
     }
 }

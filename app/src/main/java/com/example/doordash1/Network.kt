@@ -10,4 +10,8 @@ object Network {
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
+
+    fun doorDash(): DoorDashService {
+        return retrofit.create(DoorDashService::class.java)
+    }
 }
