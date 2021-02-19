@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.doordash1.databinding.ActivityStoreBinding
 
-class StoreActivity : AppCompatActivity() {
+class RestaurantActivity : AppCompatActivity() {
 
     companion object {
         const val TAG = "StoreActivity"

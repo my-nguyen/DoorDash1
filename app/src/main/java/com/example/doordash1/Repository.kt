@@ -38,14 +38,14 @@ object Repository {
             override fun onResponse(call: Call<Restaurant>, response: Response<Restaurant>) {
                 val body = response.body()
                 if (body == null) {
-                    Log.w(MainActivity.TAG, "Did not receive a valid response from DoorDash API... exiting")
+                    Log.w(TAG, "Did not receive a valid response from DoorDash API... exiting")
                 } else {
                     restaurant.value = body
                 }
             }
 
             override fun onFailure(call: Call<Restaurant>, t: Throwable) {
-                Log.d(StoreActivity.TAG, "onFailure $t")
+                Log.d(TAG, "onFailure $t")
             }
         })
         return restaurant

@@ -1,13 +1,10 @@
 package com.example.doordash1
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,9 +14,6 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.doordash1.databinding.ItemStoreBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class StoresAdapter(private val context: Context, private val stores: List<Store>): RecyclerView.Adapter<StoresAdapter.ViewHolder>() {
 
@@ -44,7 +38,7 @@ class StoresAdapter(private val context: Context, private val stores: List<Store
                 val store = stores[adapterPosition]
                 val model = ViewModelProvider(context as AppCompatActivity).get(MainViewModel::class.java)
                 model.getRestaurant(store.id).observe(context, Observer {
-                    val intent = Intent(context, StoreActivity::class.java)
+                    val intent = Intent(context, RestaurantActivity::class.java)
                     intent.putExtra("EXTRA_STORE", store)
                     intent.putExtra("EXTRA_RESTAURANT", it)
                     context.startActivity(intent)

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel: ViewModel() {
 
-    var stores: MutableLiveData<List<Store>> = Repository.getStores()
+    private var stores: MutableLiveData<List<Store>> = Repository.getStores()
 
     fun getStores(): LiveData<List<Store>> = stores
 
